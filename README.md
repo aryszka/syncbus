@@ -13,4 +13,4 @@ Find the documentation here:
 [https://godoc.org/github.com/aryszka/syncbus](https://godoc.org/github.com/aryszka/syncbus).
 
 Find an example here:
-[http://localhost:8989/pkg/github.com/aryszka/syncbus/#example_](http://localhost:8989/pkg/github.com/aryszka/syncbus/#example_).
+[https://godoc.org/github.com/aryszka/syncbus#example-package](https://godoc.org/github.com/aryszka/syncbus#example-package).
