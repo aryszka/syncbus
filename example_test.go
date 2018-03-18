@@ -30,16 +30,17 @@ func (s *Server) Resource() int {
 }
 
 func Example() {
-	s := &Server{}
-	s.testBus = syncbus.New(120 * time.Millisecond)
+	bus := syncbus.New(120 * time.Millisecond)
 
+	s := &Server{}
+	s.testBus = bus
 	s.AsyncInit()
-	if err := s.testBus.Wait("initialized"); err != nil {
+
+	if err := bus.Wait("initialized"); err != nil {
 		fmt.Println("failed:", err)
 	}
 
 	fmt.Println(s.Resource())
-
 	// Output:
 	// 42
 }

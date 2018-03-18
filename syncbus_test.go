@@ -76,6 +76,34 @@ func TestNilSignal(t *testing.T) {
 	}
 }
 
+func TestNilReset(t *testing.T) {
+	var bus *SyncBus
+	tw := newTestWait(1)
+	go func() {
+		bus.Signal("test")
+		tw.done()
+	}()
+
+	bus.ResetSignals("test")
+	if err := tw.wait(); err != nil {
+		t.Error(err)
+	}
+}
+
+func TestNilResetAll(t *testing.T) {
+	var bus *SyncBus
+	tw := newTestWait(1)
+	go func() {
+		bus.Signal("test")
+		tw.done()
+	}()
+
+	bus.ResetAllSignals()
+	if err := tw.wait(); err != nil {
+		t.Error(err)
+	}
+}
+
 func TestNilClose(t *testing.T) {
 	var bus *SyncBus
 	bus.Close()
@@ -96,6 +124,20 @@ func TestEmptySignal(t *testing.T) {
 		tw.done()
 	}()
 
+	if err := tw.wait(); err != nil {
+		t.Error(err)
+	}
+}
+
+func TestEmptyRest(t *testing.T) {
+	bus := New(120 * time.Millisecond)
+	tw := newTestWait(1)
+	go func() {
+		bus.Signal()
+		tw.done()
+	}()
+
+	bus.ResetSignals()
 	if err := tw.wait(); err != nil {
 		t.Error(err)
 	}
@@ -210,5 +252,40 @@ func TestMultiKeySignal(t *testing.T) {
 	bus.Signal("baz")
 	if err := tw2.wait(); err != nil {
 		t.Error(err)
+	}
+}
+
+func TestSignalBeforeWait(t *testing.T) {
+	bus := New(120 * time.Millisecond)
+	defer bus.Close()
+
+	bus.Signal("foo")
+	if err := bus.Wait("foo"); err != nil {
+		t.Error(err)
+	}
+}
+
+func TestReset(t *testing.T) {
+	bus := New(12 * time.Millisecond)
+	defer bus.Close()
+
+	bus.Signal("foo")
+	bus.ResetSignals("foo")
+	if err := bus.Wait("foo"); err != ErrTimeout {
+		t.Error("failed to timeout")
+	}
+}
+
+func TestResetAll(t *testing.T) {
+	bus := New(12 * time.Millisecond)
+	defer bus.Close()
+
+	bus.Signal("foo")
+	bus.Signal("bar")
+	bus.Signal("baz")
+
+	bus.ResetAllSignals()
+	if err := bus.Wait("foo", "bar", "baz"); err != ErrTimeout {
+		t.Error("failed to timeout")
 	}
 }
