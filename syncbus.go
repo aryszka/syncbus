@@ -195,10 +195,10 @@ func (b *SyncBus) ResetSignals(keys ...string) {
 	b.reset <- keys
 }
 
-// ResetAllSignals clears all the set signals.
+// Reset clears all the signals.
 //
 // If the receiver *SyncBus is nil, it is a noop.
-func (b *SyncBus) ResetAllSignals() {
+func (b *SyncBus) Reset() {
 	if b == nil {
 		return
 	}

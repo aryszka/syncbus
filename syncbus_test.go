@@ -98,7 +98,7 @@ func TestNilResetAll(t *testing.T) {
 		tw.done()
 	}()
 
-	bus.ResetAllSignals()
+	bus.Reset()
 	if err := tw.wait(); err != nil {
 		t.Error(err)
 	}
@@ -284,7 +284,7 @@ func TestResetAll(t *testing.T) {
 	bus.Signal("bar")
 	bus.Signal("baz")
 
-	bus.ResetAllSignals()
+	bus.Reset()
 	if err := bus.Wait("foo", "bar", "baz"); err != ErrTimeout {
 		t.Error("failed to timeout")
 	}
