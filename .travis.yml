@@ -1,0 +1,12 @@
+sudo: false
+language: go
+go:
+- 1.x
+branches:
+  except:
+  - "/^v\\d+[.]\\d+[.]\\d+.*/"
+script:
+- make ci-trigger
+env:
+  global:
+- secure: i9SWpbE9UXbPQljlqVoRt7mGAr3GTIgcRZ/sNDWxGa8YYtdQMPI8ooCtSGdN0YJHyrqmYw+LbW8WypLkaxtdyeWGmoeMTKgJpYcDV7trCGBoeLIK+8kiKkiggCd+JmOpiMJpHIkSG3QPwRdWzxVr5hjVDxWpnlzX0eoYvYzDGCPaOZ4zbE9lAddDJnsRIt4gP3ZWuf+28ep7ivIKDW1ZTCewjiXt/tQmlX1WJ843TvWWmrJ//UOZM99nsHt1Tmai6+Trwszi7/AjIAPo8hzdAXvJNakx46XmKhJLGmDYEqOEwZhWWknL0/W8KSW9dASpb8lcPVdJUbIDdktQUrrK3c9qWlaQ8RDC9hPqRc2nJkXJIJCLhGkFAAZz3vP75/FBNco0NT73W4PyfKuk8fJwHA+T7in/+NGsuytSV0ZR7uXivsQmsySq/cSD+66estCjCgvQiCZwdOIL/LNojMWI1DsBBaesEOM7j9v5Xcf3FGRU1kT8S37+3MGjcX0XB+xJ6a16K23COtlSiMUahSwNMnAna/QkVmXrSTt14kMZZIHluBCUepuAX2yf8E3qeH35hoLAsGuBog/aMg/ny6SBmguRfptE9neimWCHZuCcB9hHTNlcfa1B+5ZUVw9tb0867m3giUC8RrgFnFquVW4kPNglrMrYxzm0KedCJJXbW6c=
